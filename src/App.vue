@@ -24,7 +24,7 @@ export default {
 
       res = res.data;
 
-      // alert(JSON.stringify(res));
+      alert(JSON.stringify(res));
 
       // if (res === 'error') {
       //   alert('接口调用失败。');
