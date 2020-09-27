@@ -20,14 +20,16 @@ export default {
   },
   methods: {
     async scanQRCode () {
-      let res = await axios.get('http://wechat-test.humandetail.com/getSignature');
+      let res = await axios.post('http://wechat-test.humandetail.com/getSignature');
 
       res = res.data;
 
-      if (res === 'error') {
-        alert('接口调用失败。');
-        return false;
-      }
+      // alert(JSON.stringify(res));
+
+      // if (res === 'error') {
+      //   alert('接口调用失败。');
+      //   return false;
+      // }
 
       const {
         signature,
