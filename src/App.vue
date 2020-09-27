@@ -20,7 +20,9 @@ export default {
   },
   methods: {
     async scanQRCode () {
-      let res = await axios.post('http://wechat-test.humandetail.com/getSignature');
+      let res = await axios.post('http://wechat-test.humandetail.com/getSignature', {
+        url: location.href.split('#')[0]
+      });
 
       res = res.data;
 
