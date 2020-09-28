@@ -75,10 +75,21 @@ export default {
       let result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
       this.result = result;
 
+      const redirectUrl = `${result}${result.indexOf('?') > -1 ? '?' : '&'}from=${window.location.href}&action=publicScan`;
+
       setTimeout(() => {
-        window.location.href = `${result}${result.indexOf('?') > -1 ? '?' : '&'}from=${window.location.href}&action=publicScan`;
+        this.redirect(redirectUrl);
       }, 2000)
       // alert(result);
+    },
+
+    redirect (url) {
+      const oA = document.createElement('a');
+      oA.href = url;
+
+      document.body.appendChild(oA);
+      oA.click();
+      oA.remove();
     }
   },
   mounted () {
