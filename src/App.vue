@@ -23,17 +23,21 @@ export default {
   methods: {
     async scanQRCode () {
       const url = encodeURIComponent(location.href.split('#')[0]);
+      const _this = this;
 
       let signData = this.signData;
 
       if (!signData || !signData.signature) {
-        let res = await axios.get('/api/v1/wx/jsConfig?url=' + url);
+        // let res = await axios.get('/api/v1/wx/jsConfig?url=' + url);
+        let res = await axios.post('http://wechat-test.humandetail.com/getSignature', {
+          url
+        });
         res = res.data;
         // alert(JSON.stringify(res));
-        if (res.code !== 0) {
-          alert('接口调用失败。');
-          return false;
-        }
+        // if (res.code !== 0) {
+        //   alert('接口调用失败。');
+        //   return false;
+        // }
 
         signData = res.data;
       }
@@ -54,7 +58,6 @@ export default {
       }
       // alert(JSON.stringify(config));
       wx.config(config);
-      const _this = this;
       wx.ready(() => {
         wx.scanQRCode({
           needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
