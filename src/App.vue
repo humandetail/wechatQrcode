@@ -78,7 +78,7 @@ export default {
       let result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
       this.result = result;
 
-      const redirectUrl = `${result}${result.indexOf('?') > -1 ? '?' : '&'}from=${window.location.href}&action=publicScan&r=${Math.random()}`;
+      const redirectUrl = `${result}${result.indexOf('?') > -1 ? '&' : '?'}from=${encodeURIComponent(window.location.href)}&action=publicScan&r=${Math.random()}`;
 
       this.redirectUrl = redirectUrl;
 
