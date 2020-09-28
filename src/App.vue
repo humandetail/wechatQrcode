@@ -6,7 +6,7 @@
       {{ result }}
     </div>
     <br />
-    <a :href="redirectUrl" v-if="redirectUrl">跳转回结果页面</a>
+    <a :href="redirectUrl" v-if="redirectUrl" target="_blank">跳转回结果页面{{ redirectUrl }}</a>
   </div>
 </template>
 
@@ -78,7 +78,7 @@ export default {
       let result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
       this.result = result;
 
-      const redirectUrl = `${result}${result.indexOf('?') > -1 ? '?' : '&'}from=${window.location.href}&action=publicScan`;
+      const redirectUrl = `${result}${result.indexOf('?') > -1 ? '?' : '&'}from=${window.location.href}&action=publicScan&r=${Math.random()}`;
 
       this.redirectUrl = redirectUrl;
 
