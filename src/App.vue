@@ -22,8 +22,9 @@ export default {
   },
   methods: {
     async scanQRCode () {
-      const url = encodeURIComponent(location.href.split('#')[0]);
-      const _this = this;
+      // const url = encodeURIComponent(location.href.split('#')[0]);
+      const _this = this,
+            url = location.href.split('#')[0];
 
       let signData = this.signData;
 
