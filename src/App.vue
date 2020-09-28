@@ -17,7 +17,7 @@ export default {
   name: 'App',
   data() {
     return {
-      loadingShow: false,
+      loading: true, // 加载配置文件
       result: '',
       signData: null,
       redirectUrl: ''
@@ -99,8 +99,9 @@ export default {
       // oA.remove();
     }
   },
-  mounted () {
-    this.scanQRCode();
+  async mounted () {
+    await this.scanQRCode().catch(() => {});
+    this.loading = false;
   }
 }
 </script>
