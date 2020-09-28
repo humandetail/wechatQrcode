@@ -82,19 +82,20 @@ export default {
 
       this.redirectUrl = redirectUrl;
 
-      // setTimeout(() => {
-      //   this.redirect(redirectUrl);
-      // }, 2000)
-      // alert(result);
+      setTimeout(() => {
+        this.redirect(redirectUrl);
+      }, 2000)
+      alert(result);
     },
 
     redirect (url) {
-      const oA = document.createElement('a');
-      oA.href = url;
+      window.location.href = url;
+      // const oA = document.createElement('a');
+      // oA.href = url;
 
-      document.body.appendChild(oA);
-      oA.click();
-      oA.remove();
+      // document.body.appendChild(oA);
+      // oA.click();
+      // oA.remove();
     }
   },
   mounted () {
