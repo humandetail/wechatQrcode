@@ -5,6 +5,8 @@
     <div class="result">
       {{ result }}
     </div>
+    <br />
+    <a :href="redirectUrl" v-if="redirectUrl">跳转回结果页面</a>
   </div>
 </template>
 
@@ -18,6 +20,7 @@ export default {
       loadingShow: false,
       result: '',
       signData: null,
+      redirectUrl: ''
     }
   },
   methods: {
@@ -77,9 +80,11 @@ export default {
 
       const redirectUrl = `${result}${result.indexOf('?') > -1 ? '?' : '&'}from=${window.location.href}&action=publicScan`;
 
-      setTimeout(() => {
-        this.redirect(redirectUrl);
-      }, 2000)
+      this.redirectUrl = redirectUrl;
+
+      // setTimeout(() => {
+      //   this.redirect(redirectUrl);
+      // }, 2000)
       // alert(result);
     },
 
