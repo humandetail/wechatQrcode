@@ -17,25 +17,33 @@ export default {
     return {
       loadingShow: false,
       result: '',
+      signData: null,
     }
   },
   methods: {
     async scanQRCode () {
-      let res = await axios.post('http://wechat-test.humandetail.com/getSignature', {
-        url: location.href.split('#')[0]
-      });
-      res = res.data;
-      // alert(JSON.stringify(res));
-      // if (res === 'error') {
-      //   alert('接口调用失败。');
-      //   return false;
-      // }
+      const url = encodeURIComponent(location.href.split('#')[0]);
+
+      let signData = this.signData;
+
+      if (!signData || !signData.signature) {
+        let res = await axios.get('/api/v1/wx/jsConfig?url=' + url);
+        res = res.data;
+        // alert(JSON.stringify(res));
+        if (res.code !== 0) {
+          alert('接口调用失败。');
+          return false;
+        }
+
+        signData = res.data;
+      }
+
       const {
         signature,
         noncestr,
         appid,
         timestamp
-      } = res.data;
+      } = signData;
       const config = {
         debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
         appId: appid, // 必填，公众号的唯一标识
